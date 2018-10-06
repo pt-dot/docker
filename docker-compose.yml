@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  web:
+    build: 
+      context: ./
+      dockerfile: ./docker/php.Dockerfile
+    container_name: larademo
+    volumes:
+      - ./:/var/www/html
+      #- ./logs:/var/log/apache2
+    ports:
+      - '8001:8000'
+    environment:
+      - VIRTUAL_HOST=
+      - DB_HOST=larademodb
+      - DB_USER=root
+      - DB_NAME=thedb
+      - DB_PASSWD=strongpassword
+    depends_on:
+      - db
+
+  db:
+    build: 
+      context: ./
+      dockerfile: ./docker/mysql.Dockerfile
+    container_name: larademodb
+    #volumes:
+    #  - ./dbdata/:/var/lib/mysql
