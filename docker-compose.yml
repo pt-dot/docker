@@ -5,18 +5,19 @@ services:
     build: 
       context: ./
       dockerfile: ./docker/php.Dockerfile
-    container_name: larademo
+    #container_name: larademo
     volumes:
-      - ./:/var/www/html
+      - ./:/app
       #- ./logs:/var/log/apache2
     ports:
-      - '8001:8000'
+      - '8000:8000'
     environment:
-      - VIRTUAL_HOST=
       - DB_HOST=larademodb
       - DB_USER=root
       - DB_NAME=thedb
       - DB_PASSWD=strongpassword
+      - USERID=1001
+      - GRPID=1001
     depends_on:
       - db
 
@@ -25,5 +26,11 @@ services:
       context: ./
       dockerfile: ./docker/mysql.Dockerfile
     container_name: larademodb
-    #volumes:
-    #  - ./dbdata/:/var/lib/mysql
+    volumes:
+      - ./dbdata/:/var/lib/mysql
+    environment:
+      - USERID=1000
+      - GRPID=1000
+      - DB_USER=root
+      - DB_NAME=thedb
+      - DB_PASSWD=strongpassword
