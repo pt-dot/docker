@@ -8,7 +8,7 @@ ENV GRPID=1000
 COPY ./docker/php.ini /usr/local/etc/php
 RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev \
  libpng-dev libmcrypt-dev mysql-client libcurl3-dev libicu-dev libxml2-dev libbz2-dev zip unzip 	
-RUN docker-php-ext-install mbstring mysqli pdo_mysql curl json intl gd xml zip bz2 opcache
+RUN docker-php-ext-install mbstring mysqli pdo_mysql curl json intl gd xml zip bz2 opcache bcmath
 
 COPY ./docker/myapp.conf /etc/apache2/sites-available/000-default.conf
 COPY ./docker/apache2.conf /etc/apache2/apache2.conf
